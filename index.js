@@ -1,3 +1,4 @@
+
 import express from "express"
 import cors from "cors"
 import mysql2 from "mysql2"
@@ -29,17 +30,6 @@ app.get("/", (request, response) => {
 
 app.listen(3000, () => {
     console.log("Servidor online! http://localhost:3000/")
-
-    const comandoSelect =  "SELECT * FROM musicas_EmillyCarvalho"
-
-     sql.query(comandoSelect, (error, data) => { 
-        if(error){
-            console.log("error")
-            return
-        } 
-        response.json(data)
-
-    })
 })
 
 export default app
