@@ -15,16 +15,32 @@ const sql = mysql2.createPool({
     database: process.env.NOME_BANCO
 })
 
+// LISTAR MÚSICAS
 app.get("/", (request, response) => {
     const comandoSelect = "SELECT * FROM musicas_EmillyCarvalho"
 
     sql.query(comandoSelect, (error, data) => {
         if (error) {
-            console.log("error")
-            return
+            console.log(error)
+            return response.status(500).json({ mensagem: "Erro ao buscar músicas" })
         }
 
         response.json(data)
+    })
+})
+
+app.post("/cadastrar", (request, response) => {
+    const { titulo, artista, genero, ano, duracao } = request.body
+
+    const comandoInsert = "INSERT INTO musicas_EmillyCarvalho(titulo, artista, genero, ano, duracao) VALUES (?, ?, ?, ?, ?)"
+
+    sql.query(comandoInsert, [titulo, artista, genero, ano, duracao], (error) => {
+        if (error) {
+            console.log(error)
+            return response.status(500).json({ mensagem: "Erro ao cadastrar música" })
+        }
+
+        response.status(201).json({ mensagem: "Música cadastrada com sucesso!" })
     })
 })
 
