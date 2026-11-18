@@ -1,4 +1,4 @@
-USER musicas_EmillyCarvalho;
+USER musicas_Emilly_Carvalho;
 
 CREATE TABLE musicas_EmillyCarvalho (
     id INT AUTO_INCREMENT PRIMARY KEY,
